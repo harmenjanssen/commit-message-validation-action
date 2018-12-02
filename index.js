@@ -52,7 +52,7 @@ async function main() {
       context: 'harmenjanssen/commit-message-validation-action'
     });
   } catch (err) {
-    console.error(err);
+    console.log(err);
     await updateCommitStatus(octokit, owner, repo, process.env.GITHUB_SHA, {
       state: 'failure',
       context: 'harmenjanssen/commit-message-validation-action',
