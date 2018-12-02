@@ -14,6 +14,6 @@ ADD package.json /package.json
 WORKDIR /
 COPY . /
 
-RUN npm ci
+#RUN npm ci
 
 ENTRYPOINT ["node", "/index.js"]
