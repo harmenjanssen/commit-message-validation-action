@@ -14,3 +14,10 @@ action "validate commit message" {
   secrets = ["GITHUB_TOKEN"]
 }
 ```
+
+This performs the following checks:
+
+- Commit message should start with an uppercase letter.
+- Subject line should not exceed 72 characters.
+- Commit should start with an imperative verb.
+- Commit message should not contain rebase instructions like `!fixup` or `!squash`.
