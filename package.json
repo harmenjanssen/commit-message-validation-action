@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/harmenjanssen/commit-message-validation-action#readme",
   "dependencies": {
-    "@octokit/rest": "^16.1.0"
+    "@octokit/rest": "^16.1.0",
+    "wordpos": "^1.2.0"
   }
 }

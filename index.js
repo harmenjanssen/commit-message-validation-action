@@ -1,3 +1,4 @@
+const WordPOS = require('wordpos');
 const createOctokit = require('./lib/github.js');
 
 const SUBJECT_MAXLENGTH = 72;
@@ -22,6 +23,22 @@ async function validateMessage(owner, repo, commit_sha) {
     }
 
     // Check whether the commit message starts with an imperative verb
+    const [ firstWord, restWords ] = subject.split(' ');
+    if (!/^[A-Z]{1}/.test(firstWord)) {
+      console.error('Subject does not start with an uppercase letter');
+      process.exit(1);
+    }
+
+    const wordpos = new WordPOS();
+    if (!wordpos.isVerb(firstWord)) {
+      console.error('Subject does not seem to start with a verb');
+      process.exit(1);
+    }
+
+    if (/[bcdfghjklmnpqrstvwxz]+ed$/.test(firstWord)) {
+      console.error('Subject does not seem to start with an imperative verb');
+      process.exit(1);
+    }
 
   } catch (err) {
     console.error(err);
