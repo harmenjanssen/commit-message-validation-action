@@ -5,7 +5,7 @@ Github action for validating commit messages.
 
 ```
 workflow "validate commit message action" {
-  on = "pull_request"
+  on = "push"
   resolves = ["validate commit message"]
 }
 
