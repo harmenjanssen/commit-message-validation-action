@@ -30,7 +30,8 @@ async function validateMessage(octokit, owner, repo, commit_sha) {
   }
 
   const wordpos = new WordPOS();
-  if (!wordpos.isVerb(firstWord)) {
+  const isVerb = await wordpos.isVerb(firstWord);
+  if (!isVerb) {
     throw new Error('Subject does not seem to start with a verb');
   }
 
