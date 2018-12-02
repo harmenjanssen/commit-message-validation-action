@@ -1,0 +1,19 @@
+{
+  "name": "commit-message-validation-action",
+  "version": "1.0.0",
+  "description": "Github action for validating commit messages.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harmenjanssen/commit-message-validation-action.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harmenjanssen/commit-message-validation-action/issues"
+  },
+  "homepage": "https://github.com/harmenjanssen/commit-message-validation-action#readme"
+}
