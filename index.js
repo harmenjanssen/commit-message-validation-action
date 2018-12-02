@@ -6,7 +6,15 @@ const SUBJECT_MAXLENGTH = 72;
 async function updateCommitStatus(octokit, owner, repo, commit_sha, options) {
   const { state, target_url, description, context } = options;
   console.log('Updating status for commit ' + commit_sha);
-  const result = await octokit.repos.createStatus({owner, repo, commit_sha, state, target_url, description, context})
+  const result = await octokit.repos.createStatus({
+    owner,
+    repo,
+    sha: commit_sha,
+    state,
+    target_url,
+    description,
+    context
+  })
 }
 
 async function validateMessage(octokit, owner, repo, commit_sha) {
