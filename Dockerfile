@@ -10,10 +10,10 @@ LABEL "homepage"="http://github.com/harmenjanssen/commit-message-validation-acti
 LABEL "maintainer"="Harmen Janssen <harmen@whatstyle.net>"
 
 ADD package.json /package.json
-#ADD package-lock.json /package-lock.json
+ADD package-lock.json /package-lock.json
 WORKDIR /
 COPY . /
 
-#RUN npm ci
+RUN npm ci
 
 ENTRYPOINT ["node", "/index.js"]

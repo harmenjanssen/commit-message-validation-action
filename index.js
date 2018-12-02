@@ -1,10 +1,7 @@
-console.log('hello world');
-console.dir(process.env);
+const createOctokit = require('./lib/github.js');
 
-const { execSync } = require('child_process');
+const github = createOctokit();
+const { owner, repo } = process.env.GITHUB_REPOSITORY.split('/');
+const commit = await octokit.git.getCommit({ owner , repo, commit_sha: process.env.GITHUB_SHA });
 
-const stdout = execSync(`git log --format=%B -n 1 ${process.env.GITHUB_SHA}`);
-console.log(
-  stdout
-);
-
+console.log(commit);

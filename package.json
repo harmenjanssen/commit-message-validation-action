@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/harmenjanssen/commit-message-validation-action/issues"
   },
-  "homepage": "https://github.com/harmenjanssen/commit-message-validation-action#readme"
+  "homepage": "https://github.com/harmenjanssen/commit-message-validation-action#readme",
+  "dependencies": {
+    "@octokit/rest": "^16.1.0"
+  }
 }
