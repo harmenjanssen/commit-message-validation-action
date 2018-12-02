@@ -3,7 +3,7 @@ const createOctokit = require('./lib/github.js');
 async function validateMessage(owner, repo, commit_sha) {
   const octokit = createOctokit();
   try {
-    const commit = await octokit.git.getCommit({ owner , repo, commit_sha });
+    const commit = await octokit.git.getCommit({ owner, repo, commit_sha });
     console.log(commit);
   } catch (err) {
     console.error(err);
@@ -11,5 +11,5 @@ async function validateMessage(owner, repo, commit_sha) {
   }
 }
 
-const { owner, repo } = process.env.GITHUB_REPOSITORY.split('/');
+const [ owner, repo ] = process.env.GITHUB_REPOSITORY.split('/');
 validateMessage(owner, repo, process.env.GITHUB_SHA);
