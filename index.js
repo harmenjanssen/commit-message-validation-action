@@ -5,7 +5,7 @@ const SUBJECT_MAXLENGTH = 72;
 
 async function updateCommitStatus(octokit, owner, repo, commit_sha, options) {
   const { state, target_url, description, context } = options;
-  const result = await octokit.repos.createStatus({owner, repo, sha, state, target_url, description, context})
+  const result = await octokit.repos.createStatus({owner, repo, commit_sha, state, target_url, description, context})
 }
 
 async function validateMessage(octokit, owner, repo, commit_sha) {
@@ -46,11 +46,12 @@ async function main() {
   const [ owner, repo ] = process.env.GITHUB_REPOSITORY.split('/');
   try {
     await validateMessage(octokit, owner, repo, process.env.GITHUB_SHA);
-    process.exit(0);
     await updateCommitStatus(octokit, owner, repo, process.env.GITHUB_SHA, {
       state: 'success',
       context: 'harmenjanssen/commit-message-validation-action'
     });
+
+    process.exit(0);
   } catch (err) {
     console.log(err);
     await updateCommitStatus(octokit, owner, repo, process.env.GITHUB_SHA, {
