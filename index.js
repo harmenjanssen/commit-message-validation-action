@@ -7,10 +7,10 @@ async function main() {
   const commit = await octokit.git.getCommit({ owner, repo, commit_sha: process.env.GITHUB_SHA });
   try {
     await validateMessage(commit.data.message);
-    console.log('This commit looks beautiful');
+    console.log('\n\nThis commit looks beautiful\n\n');
     process.exit(0);
   } catch (err) {
-    console.log(err.message);
+    console.log(`\n\n${err.message}\n\n`);
     process.exit(1);
   }
 }
