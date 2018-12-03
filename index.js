@@ -3,6 +3,20 @@ const createOctokit = require('./lib/github.js');
 
 const SUBJECT_MAXLENGTH = 72;
 
+// Arbitrary list of verbs not in the wordpos list.
+const VERB_EXCEPTIONS = [
+  'refactor',
+  // Although "fixed" is not a valid imperative, it's also not recognized by wordpos,
+  // resulting in a misleading error message.
+  'fixed'
+];
+
+async function isVerb(word) {
+  const wordpos = new WordPOS();
+  const isVerb = await wordpos.isVerb(word);
+  return isVerb || VERB_EXCEPTIONS.includes(word);
+}
+
 async function validateMessage(octokit, owner, repo, commit_sha) {
   const commit = await octokit.git.getCommit({ owner, repo, commit_sha });
   const [ subject ] = commit.data.message.split("\n");
@@ -24,8 +38,7 @@ async function validateMessage(octokit, owner, repo, commit_sha) {
     throw new Error('Subject does not start with an uppercase letter');
   }
 
-  const wordpos = new WordPOS();
-  const isVerb = await wordpos.isVerb(firstWord);
+  const isVerb = await isVerb(firstWord);
   if (!isVerb) {
     throw new Error('Subject does not seem to start with a verb');
   }
