@@ -21,3 +21,11 @@ This performs the following checks:
 - Subject line should not exceed 72 characters.
 - Commit should start with an imperative verb.
 - Commit message should not contain rebase instructions like `!fixup` or `!squash`.
+
+## Tests
+
+Run the tests using 
+
+```
+$ npm run test
+```
