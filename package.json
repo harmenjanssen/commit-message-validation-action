@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/harmenjanssen/commit-message-validation-action.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Harmen Janssen <harmen@whatstyle.net>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/harmenjanssen/commit-message-validation-action/issues"
   },
