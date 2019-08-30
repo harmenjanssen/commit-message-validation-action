@@ -14,7 +14,21 @@ describe('validateMessage', () => {
       'Remove the codes',
       'Count the sheep',
       'Fire the laser!',
-      'Build the machine'
+      'Build the machine',
+    ];
+    expect.assertions(validMessages.length);
+    for (let validMsg of validMessages) {
+      const success = await validateMessage(validMsg);
+      expect(success).toEqual(true);
+    }
+  });
+
+  test('It allows version commits', async () => {
+    const validMessages = [
+      'v1.0.0',
+      'v123.12345.123456790',
+      'v2.42.10-alpha',
+      'v3.80.0+meta',
     ];
     expect.assertions(validMessages.length);
     for (let validMsg of validMessages) {
@@ -34,6 +48,7 @@ describe('validateMessage', () => {
       ['!squash This commit was made with the --squash flag', 'Commit includes rebase instruction: !squash'],
       ['Fixed the bug', 'Subject does not seem to start with an imperative verb'],
       ['Closed the ticket', 'Subject does not seem to start with an imperative verb'],
+      ['v1.0.0 added', 'Subject does not start with an uppercase letter'],
     ];
     expect.assertions(invalidMessages.length);
     for (let [message, error] of invalidMessages) {
