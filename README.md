@@ -16,7 +16,6 @@ jobs:
     name: Validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
       - name: Validate
         uses: harmenjanssen/commit-message-validation-action@master
         env:
