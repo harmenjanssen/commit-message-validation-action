@@ -1,0 +1,11 @@
+on: push
+name: Validate commit message
+jobs:
+  build:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate
+        uses: martijngastkemper/commit-message-validation-action@javascript-action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
