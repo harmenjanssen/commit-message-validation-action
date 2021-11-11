@@ -1,0 +1,9 @@
+name: Commit message validation
+description: Validates commit message and sets status accordingly.
+author: Harmen Janssen
+branding:
+  icon: edit-3
+  color: red
+runs:
+  using: node12
+  main: dist/index.js

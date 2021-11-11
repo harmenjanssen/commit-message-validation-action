@@ -2,9 +2,10 @@
   "name": "commit-message-validation-action",
   "version": "1.0.0",
   "description": "Github action for validating commit messages.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "jest test/"
+    "test": "jest test/",
+    "build": "npx @vercel/ncc build --license LICENSE --minify && npx convert-action"
   },
   "repository": {
     "type": "git",
