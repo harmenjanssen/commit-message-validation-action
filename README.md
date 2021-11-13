@@ -54,3 +54,13 @@ Run the tests using
 ```
 $ npm run test
 ```
+
+### Build dist
+
+To build your changes run:
+
+```
+$ npm run build
+```
+
+Commit the changes in `dist`.
