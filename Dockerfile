@@ -1,4 +1,4 @@
-FROM node:10-slim
+FROM node:16-alpine
 
 LABEL "com.github.actions.name"="Commit message validation"
 LABEL "com.github.actions.description"="Validates commit message and sets status accordingly."
