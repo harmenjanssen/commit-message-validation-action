@@ -7,6 +7,9 @@
     "test": "jest test/",
     "build": "npx @vercel/ncc build --license LICENSE --minify && npx convert-action"
   },
+  "engines": {
+    "node": "^16"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/harmenjanssen/commit-message-validation-action.git"

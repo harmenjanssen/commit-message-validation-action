@@ -5,5 +5,5 @@ branding:
   icon: edit-3
   color: red
 runs:
-  using: node12
+  using: node16
   main: dist/index.js
