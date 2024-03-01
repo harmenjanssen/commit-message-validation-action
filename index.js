@@ -24,10 +24,16 @@ async function main() {
       repo,
       sha: commitSha,
     });
+    console.log(
+      `Found ${pullRequests.length} pull requests for commit ${commitSha}`
+    );
 
     // Loop through each pull request and add a comment.
     for (const pullRequest of pullRequests) {
       if (pullRequest.state !== "open") {
+        console.log(
+          `Skipping Pull Request ${pullRequest.number} because it is not open but ${pullRequest.state}`
+        );
         continue;
       }
       const pullRequestNumber = pullRequest.number;
