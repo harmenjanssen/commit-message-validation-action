@@ -36,6 +36,8 @@ async function main() {
         );
         continue;
       }
+      console.log(`Adding comment to PR ${pullRequest.number}`);
+
       const pullRequestNumber = pullRequest.number;
 
       await octokit.issues.createComment({
