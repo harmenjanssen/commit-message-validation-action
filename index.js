@@ -41,7 +41,7 @@ async function main() {
       await octokit.issues.createComment({
         owner,
         repo,
-        issue_number: pullRequestNumber,
+        number: pullRequestNumber,
         body: `Oh no! It looks like the commit message of ${commitSha} is invalid.\n
           Please update it to match the conventional commit format.\n\n
 
