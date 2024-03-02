@@ -18,6 +18,35 @@ async function main() {
     const commitSha = commit.data.sha;
     const [commitSubject] = commit.data.message.split("\n");
 
+    /////////////////////////////////////////////////////////////////////
+
+    const branchCommit = commit.data.parents[0];
+    const branch = branchCommit.parents.length === 0 ? branchCommit.sha : null; // Assuming it's a merge commit
+
+    if (branch) {
+      // Check if there is an open pull request for the branch
+      const { data: openPullRequests } = await octokit.pulls.list({
+        owner,
+        repo,
+        state: "open",
+        head: `${owner}:${branch}`,
+      });
+
+      if (openPullRequests.length > 0) {
+        console.log(
+          `There is an open pull request for the branch ${branch}: #${openPullRequests[0].number}`
+        );
+      } else {
+        console.log(`There is no open pull request for the branch ${branch}.`);
+      }
+    } else {
+      console.log("Unable to determine the branch associated with the commit.");
+    }
+
+    return;
+
+    /////////////////////////////////////////////////////////////////////
+
     // Get the pull requests that contain the commit
     const { data: pullRequests } = await octokit.pulls.list({
       owner,
