@@ -8,7 +8,7 @@
     "build": "npx @vercel/ncc build index.js --license LICENSE --minify"
   },
   "engines": {
-    "node": "^16"
+    "node": ">=20"
   },
   "repository": {
     "type": "git",
@@ -21,11 +21,11 @@
   },
   "homepage": "https://github.com/harmenjanssen/commit-message-validation-action#readme",
   "dependencies": {
-    "@octokit/rest": "^16.1.0",
+    "@octokit/rest": "^22.0.1",
     "wordpos": "^2.1.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.31.1",
-    "jest": "^23.6.0"
+    "@vercel/ncc": "^0.45.0",
+    "jest": "^30.5.1"
   }
 }
