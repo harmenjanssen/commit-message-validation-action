@@ -28,8 +28,20 @@ This action performs the following checks on every commit message:
 
 - Commit message should start with an uppercase letter.
 - Subject line should not exceed 72 characters.
-- Commit should start with an imperative verb.
+- Commit should start with an imperative verb, in English or Dutch.
 - Commit message should not contain rebase instructions like `!fixup` or `!squash`.
+
+Both languages are always accepted; there is nothing to configure.
+
+English verbs are recognised through [WordNet](https://wordnet.princeton.edu/), so
+anything WordNet knows as a verb will pass. Dutch has no comparable lexicon available,
+and its imperative is the bare verb stem, which overlaps with many nouns. Dutch is
+therefore validated against a fixed list in
+[`lib/dutch-imperatives.js`](lib/dutch-imperatives.js) — open a PR if a verb you need
+is missing.
+
+When the first word is close to an allowed imperative, the error message says so:
+`Fixed the bug` is rejected with *Did you mean "Fix"?*
 
 ### Examples
 
@@ -39,6 +51,14 @@ Examples of valid commit messages are:
 Add colorpicker to admin interface
 Update README.md
 Remove deprecated function
+```
+
+The same in Dutch:
+
+```
+Voeg colorpicker toe aan de beheeromgeving
+Werk README.md bij
+Verwijder deprecated functie
 ```
 
 ## Contribution
