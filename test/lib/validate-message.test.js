@@ -23,6 +23,24 @@ describe('validateMessage', () => {
     }
   });
 
+  test('It allows Dutch imperatives', async () => {
+    const validMessages = [
+      'Voeg validatie toe',
+      'Herstel de bug',
+      'Verwijder dode code',
+      'Werk de documentatie bij',
+      'Zet de feature flag aan',
+      'Vervang de tokenizer',
+      'Maak de lijst configureerbaar',
+      'Splits de validatie op',
+    ];
+    expect.assertions(validMessages.length);
+    for (let validMsg of validMessages) {
+      const success = await validateMessage(validMsg);
+      expect(success).toEqual(true);
+    }
+  });
+
   test('It allows version commits', async () => {
     const validMessages = [
       'v1.0.0',
@@ -46,8 +64,8 @@ describe('validateMessage', () => {
       ['The bug is gone', 'Subject does not seem to start with a verb'],
       ['!fixup This commit was made with the --fixup flag', 'Commit includes rebase instruction: !fixup'],
       ['!squash This commit was made with the --squash flag', 'Commit includes rebase instruction: !squash'],
-      ['Fixed the bug', 'Subject does not seem to start with an imperative verb'],
-      ['Closed the ticket', 'Subject does not seem to start with an imperative verb'],
+      ['Fixed the bug', 'Subject does not seem to start with an imperative verb. Did you mean "Fix"?'],
+      ['Closed the ticket', 'Subject does not seem to start with an imperative verb. Did you mean "Close"?'],
       ['v1.0.0 added', 'Subject does not start with an uppercase letter'],
     ];
     expect.assertions(invalidMessages.length);
@@ -57,6 +75,33 @@ describe('validateMessage', () => {
       } catch (err) {
         expect(err.message).toEqual(error);
       }
+    }
+  });
+
+  test('It throws on Dutch past participles and nouns', async () => {
+    const invalidMessages = [
+      ['Toegevoegd aan de config', 'Subject does not seem to start with a verb'],
+      ['Bijgewerkt de documentatie', 'Subject does not seem to start with a verb'],
+      ['Bugfix voor de tokenizer', 'Subject does not seem to start with a verb'],
+      ['Hersteld de bug', 'Subject does not seem to start with a verb. Did you mean "Herstel"?'],
+      ['Verwijderd de dode code', 'Subject does not seem to start with a verb. Did you mean "Verwijder"?'],
+    ];
+    expect.assertions(invalidMessages.length);
+    for (let [message, error] of invalidMessages) {
+      try {
+        const success = await validateMessage(message);
+      } catch (err) {
+        expect(err.message).toEqual(error);
+      }
+    }
+  });
+
+  test('It stays silent when nothing is close enough to suggest', async () => {
+    expect.assertions(1);
+    try {
+      const success = await validateMessage('Xyzzy the thing');
+    } catch (err) {
+      expect(err.message).toEqual('Subject does not seem to start with a verb');
     }
   });
 });
